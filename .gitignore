@@ -1,0 +1,69 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Node / JS / TS
+node_modules/
+dist/
+.next/
+.nuxt/
+*.tsbuildinfo
+
+# Java / Kotlin
+*.class
+*.jar
+*.war
+target/
+.gradle/
+
+# C / C++
+*.o
+*.out
+*.a
+*.so
+*.exe
+
+# Go
+vendor/
+
+# Rust
+target/
+
+# Ruby
+.bundle/
+vendor/bundle/
+
+# Dart / Flutter
+.dart_tool/
+.flutter-plugins
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+
+# Secrets -- NEVER commit these
+.env
+.env.local
+.env.production
+.env.development
+.env.staging
+google-services.json
+GoogleService-Info.plist
+*.secret
+*.pem
+*.key
+*.p12
+*.keystore

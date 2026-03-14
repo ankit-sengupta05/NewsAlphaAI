@@ -1,0 +1,59 @@
+﻿name: CI -- Lint, Compile and Secret Check
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+
+jobs:
+  lint_compile_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.21"
+
+      - name: Install Python tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install pre-commit flake8
+
+      - name: Install Node tools
+        run: npm install -g @babel/parser
+
+      - name: Run all pre-commit hooks
+        run: pre-commit run --all-files
+
+      - name: Check for raw secrets in source
+        run: |
+          if grep -rE \
+            "(API_KEY|SECRET_KEY|PRIVATE_KEY|PASSWORD|AUTH_TOKEN)=[^*[:space:]]+" \
+            --include="*.js" --include="*.ts" \
+            --include="*.jsx" --include="*.tsx" \
+            --include="*.py" --include="*.java" --include="*.go" \
+            --exclude-dir=node_modules --exclude-dir=.git .; then
+            echo "[FAIL] Raw secrets detected!"
+            exit 1
+          else
+            echo "[OK] No raw secrets found."
+          fi

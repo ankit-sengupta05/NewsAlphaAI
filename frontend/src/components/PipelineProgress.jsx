@@ -1,7 +1,7 @@
 // src/components/PipelineProgress.jsx
 import React from 'react'
 import clsx from 'clsx'
-import { CheckCircle2, Circle, Loader2 } from 'lucide-react'
+import { CheckCircle2, Loader2 } from 'lucide-react'
 
 const STEP_ICONS = {
   fetch_news:        '📰',
@@ -25,9 +25,19 @@ const STEP_LABELS = {
   final_predict:     'Ensemble',
 }
 
-export default function PipelineProgress({ steps, currentStep, completedSteps, logs, status }) {
+export default function PipelineProgress({
+  steps,
+  currentStep,
+  completedSteps,
+  logs,
+  status,
+  progress,
+  completedCount,
+  totalSteps,
+}) {
   return (
     <div className="card p-5 space-y-4">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-text-primary font-mono tracking-wide">
           AI PIPELINE
@@ -37,7 +47,8 @@ export default function PipelineProgress({ steps, currentStep, completedSteps, l
 
       {/* Step grid */}
       <div className="grid grid-cols-4 gap-2">
-        {steps.map((step, idx) => {
+        {steps.map((step) => {
+          // isDone: in completedSteps but NOT currently active
           const isDone    = completedSteps.includes(step) && step !== currentStep
           const isActive  = step === currentStep
           const isPending = !isDone && !isActive
@@ -47,8 +58,8 @@ export default function PipelineProgress({ steps, currentStep, completedSteps, l
               key={step}
               className={clsx(
                 'relative flex flex-col items-center gap-1.5 p-2.5 rounded-lg border transition-all duration-300',
-                isDone   && 'bg-accent-green/5 border-accent-green/20',
-                isActive && 'bg-accent-blue/10 border-accent-blue/30 step-active',
+                isDone    && 'bg-accent-green/5 border-accent-green/20',
+                isActive  && 'bg-accent-blue/10 border-accent-blue/30',
                 isPending && 'bg-bg-secondary border-bg-border opacity-40',
               )}
             >
@@ -59,15 +70,17 @@ export default function PipelineProgress({ steps, currentStep, completedSteps, l
                 ) : isDone ? (
                   <CheckCircle2 size={18} className="text-accent-green" />
                 ) : (
-                  <span className="text-base">{STEP_ICONS[step]}</span>
+                  <span className="text-base opacity-50">
+                    {STEP_ICONS[step]}
+                  </span>
                 )}
               </div>
 
               {/* Label */}
               <span className={clsx(
                 'text-[9px] font-mono text-center leading-tight',
-                isDone   && 'text-accent-green',
-                isActive && 'text-accent-blue',
+                isDone    && 'text-accent-green',
+                isActive  && 'text-accent-blue',
                 isPending && 'text-text-muted',
               )}>
                 {STEP_LABELS[step]}
@@ -85,19 +98,32 @@ export default function PipelineProgress({ steps, currentStep, completedSteps, l
       {/* Progress bar */}
       <div className="h-1 bg-bg-secondary rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-accent-blue to-accent-cyan rounded-full transition-all duration-500"
-          style={{ width: `${(completedSteps.length / steps.length) * 100}%` }}
+          className="h-full bg-gradient-to-r from-accent-blue to-accent-cyan rounded-full transition-all duration-700 ease-out"
+          style={{ width: `${progress}%` }}
         />
+      </div>
+
+      {/* Step counter + current step label */}
+      <div className="flex justify-between text-[9px] font-mono text-text-muted">
+        <span>{completedCount ?? completedSteps.length} / {totalSteps ?? steps.length} steps complete</span>
+        {currentStep && (
+          <span className="text-accent-blue animate-pulse">
+            {STEP_LABELS[currentStep]}...
+          </span>
+        )}
       </div>
 
       {/* Live log */}
       {logs.length > 0 && (
         <div className="bg-bg-secondary rounded-lg p-3 max-h-28 overflow-y-auto font-mono text-[10px] space-y-1">
-          {logs.slice(-8).map((log, i) => (
-            <div key={i} className={clsx(
-              'text-text-secondary leading-relaxed',
-              i === logs.length - 1 && 'text-accent-blue'
-            )}>
+          {logs.slice(-8).map((log, i, arr) => (
+            <div
+              key={i}
+              className={clsx(
+                'leading-relaxed',
+                i === arr.length - 1 ? 'text-accent-blue' : 'text-text-secondary',
+              )}
+            >
               <span className="text-text-muted mr-2">&gt;</span>{log}
             </div>
           ))}

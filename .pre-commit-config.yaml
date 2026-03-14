@@ -64,7 +64,8 @@
           .*\.png|.*\.jpg|.*\.svg|
           .*\.json|.*\.yaml|.*\.yml|
           .*\.env.*|.*\.gitignore|
-          .*\.css|.*\.scss|.*\.html
+          .*\.css|.*\.scss|.*\.html|
+          .*\.jsx|.*\.js|.*\.ts|.*\.tsx
         )$
 
     - id: check-requirements

@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom base ──────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --color-up:   #00e676;
+    --color-down: #ff3d57;
+    --color-neutral: #8892a4;
+    --glow-up:    0 0 20px rgba(0, 230, 118, 0.25);
+    --glow-down:  0 0 20px rgba(255, 61, 87, 0.25);
+    --border:     #1e2535;
+  }
+}
+
+/* ── Utility classes ──────────────────────────────────────────── */
+@layer components {
+  .card {
+    @apply bg-bg-card border border-bg-border rounded-xl;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-accent-blue/30 hover:bg-bg-hover;
+  }
+
+  .badge-up {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold
+           bg-accent-green/10 text-accent-green border border-accent-green/20;
+  }
+
+  .badge-down {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold
+           bg-accent-red/10 text-accent-red border border-accent-red/20;
+  }
+
+  .badge-neutral {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold
+           bg-text-muted/20 text-text-secondary border border-text-muted/20;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg bg-accent-blue text-white font-semibold text-sm
+           hover:bg-accent-blue/80 active:scale-95 transition-all duration-150 cursor-pointer;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg bg-bg-hover border border-bg-border text-text-secondary text-sm
+           hover:text-text-primary hover:border-accent-blue/30 transition-all duration-150 cursor-pointer;
+  }
+
+  .stat-label {
+    @apply text-xs text-text-muted font-mono uppercase tracking-wider;
+  }
+
+  .stat-value {
+    @apply text-xl font-mono font-semibold text-text-primary;
+  }
+
+  .input-field {
+    @apply w-full bg-bg-secondary border border-bg-border rounded-lg px-4 py-2.5
+           text-text-primary placeholder-text-muted text-sm font-mono
+           focus:outline-none focus:border-accent-blue/50 focus:ring-1 focus:ring-accent-blue/20
+           transition-all duration-150;
+  }
+
+  /* Glowing dividers */
+  .divider {
+    @apply border-t border-bg-border;
+  }
+
+  /* Price display */
+  .price-up   { color: var(--color-up); }
+  .price-down { color: var(--color-down); }
+  .price-neutral { color: var(--color-neutral); }
+
+  /* Scanline overlay for retro-terminal feel */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,0,0,0.04) 2px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+/* ── Step progress pulse ───────────────────────────────────────── */
+.step-active .step-dot {
+  animation: pulseGreen 1.2s ease-in-out infinite;
+}
+
+/* ── Candlestick chart container ──────────────────────────────── */
+.chart-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Ticker tape ──────────────────────────────────────────────── */
+.ticker-tape {
+  white-space: nowrap;
+  display: flex;
+}
+
+.ticker-tape:hover .ticker-content {
+  animation-play-state: paused;
+}
+
+/* ── Confidence ring ──────────────────────────────────────────── */
+@keyframes ringFill {
+  from { stroke-dashoffset: 251; }
+  to   { stroke-dashoffset: var(--target-offset); }
+}
+
+.ring-fill {
+  animation: ringFill 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* ── News card fade ───────────────────────────────────────────── */
+.news-card-enter {
+  animation: slideUp 0.3s ease-out;
+}

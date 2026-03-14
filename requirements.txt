@@ -1,4 +1,15 @@
-﻿absl-py==2.3.1
+﻿pip install fastapi uvicorn websockets python-dotenv pydantic pydantic-settings loguru
+pip install langchain langchain-community langchain-core langgraph langsmith
+pip install yfinance requests pandas numpy scikit-learn xgboost
+pip install sentence-transformers chromadb faiss-cpu
+pip install transformers accelerate apscheduler httpx tenacity aiofiles
+
+pip install fastapi uvicorn[standard] websockets pydantic-settings
+pip install langchain langchain-community langchain-core langgraph langsmith
+pip install langchain-openai chromadb faiss-cpu sentence-transformers
+pip install yfinance newsapi-python apscheduler aiofiles loguru
+
+absl-py==2.3.1
 accelerate==1.12.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.2

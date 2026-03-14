@@ -1,69 +1,36 @@
-﻿# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env/
+# Secrets
+winenv/
+
+# Python
+.venv/
 venv/
-env/
+__pycache__/
+*.py[cod]
 *.egg-info/
 dist/
 build/
+.pytest_cache/
 
-# Node / JS / TS
+# Data (large / generated)
+data/
+
+# Models (download separately)
+models/
+
+# Node
 node_modules/
-dist/
-.next/
-.nuxt/
-*.tsbuildinfo
-
-# Java / Kotlin
-*.class
-*.jar
-*.war
-target/
-.gradle/
-
-# C / C++
-*.o
-*.out
-*.a
-*.so
-*.exe
-
-# Go
-vendor/
-
-# Rust
-target/
-
-# Ruby
-.bundle/
-vendor/bundle/
-
-# Dart / Flutter
-.dart_tool/
-.flutter-plugins
+frontend/node_modules/
+frontend/dist/
+frontend/.env
 
 # IDE
 .vscode/
 .idea/
 *.swp
+
+# OS
 .DS_Store
+Thumbs.db
 
-# Logs
-*.log
-
-# Secrets -- NEVER commit these
-.env
-.env.local
-.env.production
-.env.development
-.env.staging
-google-services.json
-GoogleService-Info.plist
-*.secret
-*.pem
-*.key
-*.p12
-*.keystore
+# LangSmith local traces
+.langsmith/

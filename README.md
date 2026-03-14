@@ -5,14 +5,14 @@ RAG pipelines, LangGraph orchestration, and reinforcement learning feedback.
 
 ---
 
-![Python](https://img.shields.io/badge/Python_3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI_0.110+-009688?style=flat-square&logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React_18+-61DAFB?style=flat-square&logo=react&logoColor=black)
-![LangChain](https://img.shields.io/badge/LangChain_0.2+-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-ML_Model-FF6600?style=flat-square)
-![LangSmith](https://img.shields.io/badge/LangSmith-Tracing-F0B429?style=flat-square)
-![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-E06C75?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)
+[![Python](https://img.shields.io/badge/Python_3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI_0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/React_18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![LangChain](https://img.shields.io/badge/LangChain_0.2+-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)](https://langchain.com)
+[![XGBoost](https://img.shields.io/badge/XGBoost-ML_Model-FF6600?style=for-the-badge)](https://xgboost.readthedocs.io)
+[![LangSmith](https://img.shields.io/badge/LangSmith-Tracing-F0B429?style=for-the-badge)](https://smith.langchain.com)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-E06C75?style=for-the-badge)](https://trychroma.com)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 
 ---
 
@@ -22,9 +22,9 @@ RAG pipelines, LangGraph orchestration, and reinforcement learning feedback.
 +------------------------------------------------------------------+
 |                         NEWS SOURCES                             |
 |          NewsAPI  .  GNews  .  AlphaVantage                      |
-+-----------------------------+------------------------------------+
-                              |
-                              v
++----------------------------+-------------------------------------+
+                             |
+                             v
 +------------------------------------------------------------------+
 |                LANGGRAPH PIPELINE  (8 nodes)                     |
 |                                                                  |
@@ -32,17 +32,17 @@ RAG pipelines, LangGraph orchestration, and reinforcement learning feedback.
 |     -> rag_retrieve -> llm_reason -> ml_predict -> final_predict |
 |                                                                  |
 |    [ Gemma-3-4B-IT LLM ]  +  [ ChromaDB RAG ]  +  [ XGBoost ]  |
-+-----------------------------+------------------------------------+
-                              |
-             +----------------+----------------+
-             |                                 |
-             v                                 v
++----------------------------+-------------------------------------+
+                             |
+            +----------------+----------------+
+            |                                 |
+            v                                 v
   +--------------------+          +----------------------+
   |   FastAPI Backend  |          |   React Frontend     |
   |   REST + WebSocket | -------> |   Upstox-style UI    |
   +--------------------+          +----------------------+
-             |
-             v
+            |
+            v
   +------------------------------------------+
   |          RL FEEDBACK LOOP                |
   |  Record -> Resolve -> Reward -> Retrain  |
@@ -68,7 +68,7 @@ RAG pipelines, LangGraph orchestration, and reinforcement learning feedback.
 
 ---
 
-## Project Structure
+## 📄 Project Structure
 
 ```
 NewsAlphaAI/
@@ -81,7 +81,7 @@ NewsAlphaAI/
 |   +-- core/
 |   |   +-- config.py                <- Pydantic-settings config
 |   +-- models_registry/
-|   |   +-- llm_registry.py          <- Modular LLM loader (Gemma/OpenAI/Mistral/LLaMA)
+|   |   +-- llm_registry.py          <- Modular LLM loader
 |   |   +-- vectordb_registry.py     <- Chroma/FAISS factory
 |   +-- memory/
 |   |   +-- memory_manager.py        <- Agent long-term memory
@@ -119,11 +119,11 @@ NewsAlphaAI/
 |           +-- usePredictionWS.js   <- WebSocket pipeline streaming
 |           +-- useLivePrice.js      <- Live price WebSocket
 |
-+-- models/
++-- 📦 models/
 |   +-- LLM/Gemma-3-4B-IT/          <- Local LLM (download separately)
 |   +-- embedding_models/            <- Embedding model (download separately)
 |
-+-- data/                            <- Auto-created at runtime
++-- 💾 data/                         <- Auto-created at runtime
 |   +-- news/{TICKER}/
 |   +-- stocks/{TICKER}/
 |   +-- embeddings/chroma/
@@ -131,7 +131,7 @@ NewsAlphaAI/
 |   +-- ml_models/
 |   +-- rl/feedback.jsonl
 |
-+-- scripts/
++-- 📜 scripts/
     +-- setup_python.sh
     +-- start_backend.sh
     +-- start_frontend.sh
@@ -176,7 +176,7 @@ bash scripts/start_backend.sh     # starts on http://localhost:8000
 bash scripts/start_frontend.sh    # starts on http://localhost:5173
 ```
 
-### Windows (PowerShell)
+### Windows PowerShell
 
 ```powershell
 mkdir data\news, data\stocks, data\embeddings\chroma
@@ -194,18 +194,18 @@ npm run dev
 
 | Variable | Description | Default |
 |---|---|---|
-| `LLM_PROVIDER` | gemma / openai / mistral / llama | gemma |
-| `GEMMA_MODEL_PATH` | Path to Gemma model directory | ./models/LLM/Gemma-3-4B-IT |
+| `LLM_PROVIDER` | gemma / openai / mistral / llama | `gemma` |
+| `GEMMA_MODEL_PATH` | Path to Gemma model directory | `./models/LLM/Gemma-3-4B-IT` |
 | `NEWSAPI_KEY` | newsapi.org API key | - |
 | `GNEWS_API_KEY` | gnews.io API key | - |
 | `ALPHAVANTAGE_KEY` | alphavantage.co API key | - |
-| `VECTORDB_PROVIDER` | chroma or faiss | chroma |
+| `VECTORDB_PROVIDER` | chroma or faiss | `chroma` |
 | `LANGCHAIN_API_KEY` | LangSmith key (optional) | - |
-| `LANGCHAIN_TRACING_V2` | Enable LangSmith tracing | false |
-| `MEMORY_DIR` | Agent memory path | ./data/memory |
+| `LANGCHAIN_TRACING_V2` | Enable LangSmith tracing | `false` |
+| `MEMORY_DIR` | Agent memory path | `./data/memory` |
 | `OPENAI_API_KEY` | OpenAI key if using openai provider | - |
-| `MISTRAL_MODEL_PATH` | Path to Mistral model | ./models/LLM/Mistral-7B-Instruct |
-| `LLAMA_MODEL_PATH` | Path to LLaMA model | ./models/LLM/Meta-Llama-3-8B-Instruct |
+| `MISTRAL_MODEL_PATH` | Path to Mistral model | `./models/LLM/Mistral-7B-Instruct` |
+| `LLAMA_MODEL_PATH` | Path to LLaMA model | `./models/LLM/Meta-Llama-3-8B-Instruct` |
 
 ---
 
@@ -213,9 +213,7 @@ npm run dev
 
 ---
 
-### GET /api/stock/{ticker}/info
-
-![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square)
+### ![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square&logoColor=white) `/api/stock/{ticker}/info`
 
 Fetch company information for a ticker symbol.
 
@@ -231,7 +229,7 @@ Fetch company information for a ticker symbol.
 GET /api/stock/AAPL/info
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -249,9 +247,7 @@ GET /api/stock/AAPL/info
 
 ---
 
-### GET /api/stock/{ticker}/chart
-
-![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square)
+### ![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square&logoColor=white) `/api/stock/{ticker}/chart`
 
 Fetch OHLCV candlestick data for charting.
 
@@ -265,7 +261,7 @@ Fetch OHLCV candlestick data for charting.
 
 | Parameter | Type | Required | Default | Options |
 |---|---|---|---|---|
-| `period` | string | No | 30d | 7d / 30d / 90d / 1y |
+| `period` | string | No | `30d` | `7d` / `30d` / `90d` / `1y` |
 
 **Request**
 
@@ -273,7 +269,7 @@ Fetch OHLCV candlestick data for charting.
 GET /api/stock/TSLA/chart?period=30d
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -294,9 +290,7 @@ GET /api/stock/TSLA/chart?period=30d
 
 ---
 
-### GET /api/stock/{ticker}/technicals
-
-![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square)
+### ![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square&logoColor=white) `/api/stock/{ticker}/technicals`
 
 Fetch computed technical indicators for a ticker.
 
@@ -312,7 +306,7 @@ Fetch computed technical indicators for a ticker.
 GET /api/stock/NVDA/technicals
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -335,9 +329,7 @@ GET /api/stock/NVDA/technicals
 
 ---
 
-### POST /api/predict/{ticker}
-
-![POST](https://img.shields.io/badge/POST-388bfd?style=flat-square)
+### ![POST](https://img.shields.io/badge/POST-388bfd?style=flat-square&logoColor=white) `/api/predict/{ticker}`
 
 Run the full 8-node LangGraph prediction pipeline. Blocking until complete.
 
@@ -354,7 +346,7 @@ POST /api/predict/AAPL
 Content-Type: application/json
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -385,9 +377,9 @@ Content-Type: application/json
 
 | Field | Type | Description |
 |---|---|---|
-| `direction` | string | Final ensemble: UP or DOWN |
+| `direction` | string | Final ensemble direction: UP or DOWN |
 | `probability` | float | Confidence score 0.5 to 1.0 |
-| `confidence` | string | HIGH (above 0.72) / MEDIUM (above 0.58) / LOW |
+| `confidence` | string | HIGH above 0.72 / MEDIUM above 0.58 / LOW |
 | `llm_direction` | string | LLM-only directional call |
 | `llm_probability` | float | LLM raw probability |
 | `ml_direction` | string | XGBoost-only directional call |
@@ -395,13 +387,11 @@ Content-Type: application/json
 | `sentiment` | string | BULLISH / BEARISH / NEUTRAL |
 | `sentiment_score` | float | Sentiment score -1.0 to 1.0 |
 | `reasoning_bullets` | list | Key reasoning points from LLM |
-| `summary` | string | One-sentence summary |
+| `summary` | string | One-sentence prediction summary |
 
 ---
 
-### GET /api/prediction/{ticker}/history
-
-![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square)
+### ![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square&logoColor=white) `/api/prediction/{ticker}/history`
 
 Retrieve stored prediction history from agent memory.
 
@@ -417,7 +407,7 @@ Retrieve stored prediction history from agent memory.
 GET /api/prediction/AAPL/history
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -444,9 +434,7 @@ GET /api/prediction/AAPL/history
 
 ---
 
-### GET /api/prediction/{ticker}/rl-stats
-
-![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square)
+### ![GET](https://img.shields.io/badge/GET-3fb950?style=flat-square&logoColor=white) `/api/prediction/{ticker}/rl-stats`
 
 Fetch reinforcement learning accuracy statistics.
 
@@ -462,7 +450,7 @@ Fetch reinforcement learning accuracy statistics.
 GET /api/prediction/AAPL/rl-stats
 ```
 
-**Response 200**
+**Response** `200 OK`
 
 ```json
 {
@@ -489,9 +477,7 @@ GET /api/prediction/AAPL/rl-stats
 
 ---
 
-### WS ws://localhost:8000/ws/predict/{ticker}
-
-![WS](https://img.shields.io/badge/WebSocket-d2a8ff?style=flat-square)
+### ![WS](https://img.shields.io/badge/WS-d2a8ff?style=flat-square&logoColor=white) `ws://localhost:8000/ws/predict/{ticker}`
 
 Streams full pipeline step updates in real-time as the prediction runs.
 
@@ -506,7 +492,7 @@ ws.onmessage = (event) => {
 };
 ```
 
-**Message format - one message per pipeline node**
+**Message Format** - one message per pipeline node
 
 ```json
 {
@@ -522,20 +508,20 @@ ws.onmessage = (event) => {
 }
 ```
 
-**Pipeline Steps**
+**Pipeline Steps in Order**
 
 | Step | Description |
 |---|---|
 | `fetch_news` | Fetching articles from all news sources |
-| `analyse_sentiment` | Running LLM sentiment analysis |
+| `analyse_sentiment` | 🧠 Running LLM sentiment analysis |
 | `embed_store` | Embedding and storing in vector DB |
-| `fetch_stock` | Fetching stock data and indicators |
+| `fetch_stock` | 📊 Fetching stock data and indicators |
 | `rag_retrieve` | Retrieving relevant RAG context |
-| `llm_reason` | LLM generating directional reasoning |
-| `ml_predict` | XGBoost ML prediction |
+| `llm_reason` | 💬 LLM generating directional reasoning |
+| `ml_predict` | 🤖 XGBoost ML prediction |
 | `final_predict` | Ensemble combining LLM + ML result |
 
-**Final step message**
+**Final Step Message**
 
 ```json
 {
@@ -554,9 +540,7 @@ ws.onmessage = (event) => {
 
 ---
 
-### WS ws://localhost:8000/ws/live/{ticker}
-
-![WS](https://img.shields.io/badge/WebSocket-d2a8ff?style=flat-square)
+### ![WS](https://img.shields.io/badge/WS-d2a8ff?style=flat-square&logoColor=white) `ws://localhost:8000/ws/live/{ticker}`
 
 Broadcasts live price updates every 15 seconds.
 
@@ -571,7 +555,7 @@ ws.onmessage = (event) => {
 };
 ```
 
-**Received message**
+**Received Message**
 
 ```json
 {
@@ -591,7 +575,7 @@ ws.onmessage = (event) => {
 ```
 Step 1 - RECORD
   Every prediction is saved with its feature vector and price at prediction time
-  Location: data/rl/feedback.jsonl
+  Saved to: data/rl/feedback.jsonl
 
 Step 2 - RESOLVE
   After 3 days the actual price move is fetched and a reward is assigned
@@ -604,8 +588,8 @@ Step 3 - RETRAIN
   XGBoost is retrained with reward-weighted samples
 
 Step 4 - IMPROVE
-  Correct high-confidence predictions are upweighted  (x1.5)
-  Wrong predictions are downweighted                  (x0.5)
+  Correct high-confidence predictions are upweighted  x1.5
+  Wrong predictions are downweighted                  x0.5
 ```
 
 ---
@@ -630,14 +614,14 @@ LLM_PROVIDER=my_model
 
 ---
 
-## Data Directories
+## 💾 Data Directories
 
 | Directory | Purpose | Notes |
 |---|---|---|
 | `data/news/{TICKER}/` | Raw fetched articles | Auto-created |
 | `data/stocks/{TICKER}/` | OHLCV CSV cache | Auto-created |
 | `data/embeddings/chroma/` | ChromaDB vector store | Auto-created |
-| `data/memory/` | Agent long-term memory | Keep separate - back up independently |
+| `data/memory/` | Agent long-term memory | Keep separate and back up independently |
 | `data/ml_models/` | Trained XGBoost .json files | Created on first retrain |
 | `data/rl/feedback.jsonl` | RL outcome log | JSONL, one record per line |
 
@@ -657,6 +641,6 @@ View all LangGraph runs at https://smith.langchain.com
 
 ---
 
-## License
+## 📄 License
 
-MIT - see LICENSE for details.
+MIT - see [LICENSE](LICENSE) for details.

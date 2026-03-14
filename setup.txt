@@ -1,0 +1,9 @@
+====================================================
+  Setup complete! All hooks active.
+  Auto language detection : ON
+  JSX/TSX babel checker   : ON
+  Secret masking          : ON
+  Flake8 linting          : ON
+  Submodule auto-fix      : ON
+  GitHub Actions CI       : ON
+====================================================

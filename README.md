@@ -590,6 +590,7 @@ Step 3 - RETRAIN
 Step 4 - IMPROVE
   Correct high-confidence predictions are upweighted  x1.5
   Wrong predictions are downweighted                  x0.5
+  This will Improve RL Model
 ```
 
 ---
@@ -633,7 +634,7 @@ Add to your `.env`:
 
 ```env
 LANGCHAIN_TRACING_V2=true
-LANGCHAIN_API_KEY=******
+LANGCHAIN_API_KEY=
 LANGCHAIN_PROJECT=NewsAlphaAI
 ```
 
